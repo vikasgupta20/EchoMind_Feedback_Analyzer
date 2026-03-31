@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// Use environment variable if set, otherwise default to /api (relative path)
+const baseURL = import.meta.env.VITE_API_URL || '/api';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: baseURL,
   timeout: 120000,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -12,3 +15,4 @@ export const analyzeFeedback = async (text) => {
 };
 
 export default api;
+
