@@ -1,7 +1,19 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import analyzeRoutes from '../routes/analyze.js';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+// Get current directory using import.meta.url
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// ResolveRoutes path relative to current file
+const routesPath = join(__dirname, '../routes/analyze.js');
+console.log('Attempting to import routes from:', routesPath);
+
+// Import routes
+const { default: analyzeRoutes } = await import(routesPath);
 
 dotenv.config();
 
@@ -34,3 +46,4 @@ app.use((err, req, res, next) => {
 });
 
 export default app;
+
