@@ -5,14 +5,17 @@ dotenv.config();
 // Multiple API keys for rotation when rate limited
 // Use GEMINI_API_KEY_1, GEMINI_API_KEY_2, GEMINI_API_KEY_3 etc from .env
 const API_KEYS = [
+  process.env.GEMINI_API_KEY,
   process.env.GEMINI_API_KEY_1,
+  process.env.GEMINI_API_KEY2,
   process.env.GEMINI_API_KEY_2,
+  process.env.GEMINI_API_KEY3,
   process.env.GEMINI_API_KEY_3,
 ].filter(Boolean);
 
 if (API_KEYS.length === 0) {
-  console.warn('⚠️ WARNING: No Gemini API keys configured in .env file!');
-  console.warn('Add GEMINI_API_KEY_1, GEMINI_API_KEY_2, etc. to your .env file');
+  console.warn('⚠️ WARNING: No Gemini API keys configured in environment variables.');
+  console.warn('Add GEMINI_API_KEY or GEMINI_API_KEY_1 / GEMINI_API_KEY2 style keys.');
 }
 
 let currentKeyIndex = 0;
