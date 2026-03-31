@@ -24,4 +24,13 @@ app.get('/', (req, res) => {
     res.json({ status: 'ok', message: 'EchoMind AI backend is running' });
 });
 
+// Error handler
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    res.status(500).json({
+        error: 'Internal Server Error',
+        message: err.message
+    });
+});
+
 export default app;
