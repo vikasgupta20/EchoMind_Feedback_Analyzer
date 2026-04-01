@@ -1,7 +1,14 @@
 import axios from 'axios';
 
-// Use environment variable if set, otherwise default to /api (relative path)
-const baseURL = import.meta.env.VITE_API_URL || '/api';
+const normalizeBaseURL = (rawUrl) => {
+  if (!rawUrl || typeof rawUrl !== 'string') return '/api';
+
+  const trimmed = rawUrl.trim().replace(/\/+$/, '');
+  return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`;
+};
+
+// Accept VITE_API_URL with or without /api suffix.
+const baseURL = normalizeBaseURL(import.meta.env.VITE_API_URL);
 
 const api = axios.create({
   baseURL: baseURL,
